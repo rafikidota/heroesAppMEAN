@@ -63,20 +63,29 @@ export class AddComponent implements OnInit {
       return;
     }
     if (this.hero.id) {
+      // this.generateID(); // por ahora no voy a actualizar id
       this.heroesService.updateHero(this.hero)
-        .subscribe(hero => {
-          console.log('Updating ', hero);
+        .subscribe(hero => {          
           this.showSnackBar('Hero updated successfully');
+         // this.router.navigate(['/heroes/edit', hero.id]);
         }
         );
     } else {
+      this.generateID();
       this.heroesService.addHero(this.hero)
-        .subscribe(hero => {
-          console.log('Creating ', hero);
-          this.showSnackBar('Hero create successfully');
+        .subscribe(hero => {          
+          this.showSnackBar('Hero created successfully');
           this.router.navigate(['/heroes/edit', hero.id]);
         });
     }
+  }
+  generateID() {  
+    let publisher = 'dc-';
+    if (this.hero.publisher === Publisher.MarvelComics) {
+      publisher = 'marvel-';
+    }    
+    const id = publisher + this.hero.superhero.toLowerCase(); //solo funciona en nombre de una palabra
+    this.hero.id = id;
   }
 
   delete() {
