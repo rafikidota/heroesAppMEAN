@@ -19,7 +19,11 @@ export class SearchComponent implements OnInit {
 
   searching() {
     this.heroesService.getSuggestions(this.query.trim())
-      .subscribe(heroes => this.heroes = heroes);
+      .subscribe(heroes => {
+        this.heroes = heroes
+        console.log(this.heroes);
+        
+      });
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent) {
