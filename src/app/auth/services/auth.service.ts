@@ -68,6 +68,19 @@ export class AuthService {
       catchError(err => of(false))
     );
   }
+  resetPassword(email: string, password: string){
+    const url = `${this.baseUrl}/auth/new-pass`;
+    const body = { email, password };
+    return this.http.post<AuthResponse>(url, body).pipe(
+      tap(resp => {
+        if (resp.ok) {
+          localStorage.setItem('token', resp.token!);        
+        }
+      }),
+      map(resp => resp.ok),
+      catchError(err => of(err.error.msg))
+    );
+  }
 
   logout() {
     localStorage.clear();
