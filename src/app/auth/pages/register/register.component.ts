@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
     if(password === confirm){
       this.as.register(name, email, password).subscribe(ok => {
         if (ok === true) {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/heroes');
         } else {
           sweetalert.fire('Error', ok, 'error');
         }
@@ -36,8 +36,5 @@ export class RegisterComponent implements OnInit {
     }else{
       sweetalert.fire('Error', 'Confirme correctamente su contraseña', 'error');
     }
-
-    
-    
   }
 }

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.as.login(email, password).subscribe(ok => {
 
       if (ok === true) {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/heroes');
       } else {
         sweetalert.fire('Error', ok, 'error');
       }
